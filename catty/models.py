@@ -16,6 +16,7 @@ class UserInfo(models.Model):
     city = models.CharField(max_length=100, default='')
     state = models.CharField(max_length=100, default='')
     zipcode = models.CharField(max_length=5, default='')
+    cell = models.CharField(max_length=10,default='')
     url = models.URLField()
     about = models.CharField(max_length=256, default='')
     biSitter = models.BooleanField(default=False)

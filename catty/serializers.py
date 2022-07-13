@@ -11,7 +11,7 @@ class UserInfoSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = UserInfo
         fields = ('uuid', 'username', 'first_name', 'last_name', 'dob_month', 'dob_day',
-        'dob_year', 'address', 'city', 'state', 'zipcode', 'url', 'about', 'biSitter', 'services')
+        'dob_year', 'address', 'city', 'state', 'zipcode', 'cell','url', 'about', 'biSitter', 'services')
 
 class ServiceSerializer(serializers.HyperlinkedModelSerializer):
     username = serializers.HyperlinkedRelatedField(

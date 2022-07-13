@@ -16,12 +16,13 @@ def ok_view(request):
 class UserList(generics.ListCreateAPIView):
     serializer_class = UserInfoSerializer
     queryset = UserInfo.objects.all()
-    # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def post(self, request, *args, **kwargs):
         print(request.user.username)
         request.data['username'] = request.user.username
         return super().post(request, *args, **kwargs)
+
 class UserDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = UserInfo.objects.all()
     serializer_class = UserInfoSerializer
@@ -29,7 +30,7 @@ class UserDetail(generics.RetrieveUpdateDestroyAPIView):
 class ServiceList(generics.ListCreateAPIView):
     serializer_class = ServiceSerializer
     queryset = Service.objects.all()
-    # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def post(self, request, *args, **kwargs):
         print(request.user.username)
