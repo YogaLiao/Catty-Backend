@@ -7,7 +7,6 @@ import uuid
 class UserInfo(models.Model):
     uuid = models.UUIDField(unique=True, auto_created=True, default=uuid.uuid4)
     username = models.CharField(max_length=100, default='unknown_user')
-    email = models.CharField(max_length=100, default='')
     first_name = models.CharField(max_length=100, default='')
     last_name = models.CharField(max_length=100, default='')
     dob_month = models.CharField(max_length=100, default='')
@@ -22,10 +21,7 @@ class UserInfo(models.Model):
     biSitter = models.BooleanField(default=False)
 
     def __str__(self):
-        if len(self.about) < 20:
-            return str(self.about)
-        else:
-            return str( self.about[:20] + " ...")
+        return self.username
     
 class Service(models.Model):
     username = models.ForeignKey(UserInfo, on_delete=models.CASCADE, related_name= 'services')
@@ -37,7 +33,4 @@ class Service(models.Model):
     disable = ArrayField(ArrayField(models.CharField(max_length=20, blank = TRUE)))
 
     def __str__(self):
-        if len(self.note) < 20:
-            return str(self.note)
-        else:
-            return str( self.note[:20] + " ...")
+        return self.service
