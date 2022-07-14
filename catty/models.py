@@ -5,7 +5,6 @@ import uuid
 
 # Create your models here.
 class UserInfo(models.Model):
-    uuid = models.UUIDField(unique=True, auto_created=True, default=uuid.uuid4)
     username = models.CharField(max_length=100, default='unknown_user')
     first_name = models.CharField(max_length=100, default='')
     last_name = models.CharField(max_length=100, default='')
@@ -17,7 +16,7 @@ class UserInfo(models.Model):
     state = models.CharField(max_length=100, default='')
     zipcode = models.CharField(max_length=5, default='')
     cell = models.CharField(max_length=10,default='')
-    url = models.URLField()
+    url = models.CharField(max_length=500)
     about = models.CharField(max_length=256, default='')
     biSitter = models.BooleanField(default=False)
 
@@ -25,8 +24,8 @@ class UserInfo(models.Model):
         return self.username
     
 class Service(models.Model):
-    username = models.ForeignKey(UserInfo, on_delete=models.CASCADE, related_name= 'services')
-    displayName = models.CharField(max_length=100, default=username)
+    user = models.ForeignKey(UserInfo, on_delete=models.CASCADE, related_name= 'services')
+    displayName = models.CharField(max_length=100, default=user)
     headline = models.CharField(max_length=100, default='')
     service = models.CharField(max_length=100, default='onboarding')
     rate = models.IntegerField()

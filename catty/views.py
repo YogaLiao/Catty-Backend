@@ -33,8 +33,11 @@ class ServiceList(generics.ListCreateAPIView):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def post(self, request, *args, **kwargs):
-        print(request.user.username)
-        request.data['username'] = request.user.username
+        print("request.user.username")
+        print(request.user.id)
+        print(request.user.pk)
+        # request.data['username'] = request.user.id
+        request.data['user'] = request.user.id - 1
         return super().post(request, *args, **kwargs)
 
 class ServiceDetail(generics.RetrieveUpdateDestroyAPIView):
