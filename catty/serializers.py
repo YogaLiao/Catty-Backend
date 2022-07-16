@@ -7,10 +7,18 @@ class ServiceSerializer(serializers.ModelSerializer):
     #     view_name='user_detail',
     #     read_only = True
     # )
-    
+    zipcode = serializers.ReadOnlyField(source='user.zipcode')
+    first_name = serializers.ReadOnlyField(source='user.first_name')
+    last_name = serializers.ReadOnlyField(source='user.last_name')
+    address = serializers.ReadOnlyField(source='user.address')
+    city = serializers.ReadOnlyField(source='user.city')
+    state = serializers.ReadOnlyField(source='user.state')
+    cell = serializers.ReadOnlyField(source='user.cell')
+    url = serializers.ReadOnlyField(source='user.url')
+    username = serializers.ReadOnlyField(source = 'user.username')
     class Meta:
         model = Service
-        fields = ('id','user','displayName', 'headline', 'service', 'rate', 'note', 'disable')
+        fields = ('id','user','displayName', 'headline', 'service', 'rate', 'note', 'disable','zipcode','first_name','last_name','address','city','state','cell', 'url', 'username')
 
 class UserInfoSerializer(serializers.ModelSerializer):
     services = ServiceSerializer (read_only = True, many=True)

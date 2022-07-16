@@ -5,6 +5,8 @@ from rest_framework.generics import CreateAPIView
 from django.contrib.auth import get_user_model
 from .serializers import UserInfoSerializer, ServiceSerializer
 from .models import UserInfo, Service
+from django_filters.rest_framework import DjangoFilterBackend
+
 
 
 # Create your views here.
@@ -26,6 +28,7 @@ class UserList(generics.ListCreateAPIView):
 class UserDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = UserInfo.objects.all()
     serializer_class = UserInfoSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     
 class ServiceList(generics.ListCreateAPIView):
     serializer_class = ServiceSerializer
@@ -43,6 +46,19 @@ class ServiceList(generics.ListCreateAPIView):
 class ServiceDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = ServiceSerializer
     queryset = Service.objects.all()
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+class ServiceSearchList(generics.ListAPIView):
+    queryset = Service.objects.all()
+    serializer_class = ServiceSerializer
+    filter_backends = [DjangoFilterBackend]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    filterset_fields = ['service','zipcode','rate','username']
+
+
+
+
+
 
 # class TweetListProtected(generics.ListCreateAPIView):
 #     serializer_class = TweetSerializer

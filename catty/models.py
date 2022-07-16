@@ -31,6 +31,15 @@ class Service(models.Model):
     rate = models.IntegerField()
     note = models.CharField(max_length=100, default='', blank = True)
     disable = ArrayField(models.CharField(max_length=20, blank = True))
+    first_name = models.CharField(max_length=100, default='')
+    last_name = models.CharField(max_length=100, default='')
+    address = models.CharField(max_length=100, default='')
+    city = models.CharField(max_length=100, default='')
+    state = models.CharField(max_length=100, default='')
+    zipcode = models.CharField(max_length=5, default='')
+    cell = models.CharField(max_length=10,default='')
+    url = models.CharField(max_length=500,default='')
+    username = models.CharField(max_length=100, default='unknown_user')
 
     def __str__(self):
         return self.service
