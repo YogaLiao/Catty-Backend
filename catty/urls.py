@@ -7,6 +7,7 @@ urlpatterns = [
     path('users/', views.UserList.as_view(), name='user_list'),
     path('users/<int:pk>', views.UserDetail.as_view(), name='user_detail'),
     path('services/', views.ServiceList.as_view(), name = 'service_list'),
-    path('services/<int:pk>', views.ServiceDetail.as_view(), name = 'service_detail')
+    path('services/<int:pk>', views.ServiceDetail.as_view(), name = 'service_detail'),
+    path('search/services/', views.ServiceSearchList.as_view(), name = 'service_search')
 ]
 
