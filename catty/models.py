@@ -40,6 +40,7 @@ class Service(models.Model):
     cell = models.CharField(max_length=10,default='')
     url = models.CharField(max_length=500,default='')
     username = models.CharField(max_length=100, default='unknown_user')
+    about = models.CharField(max_length=256, default='')
 
     def __str__(self):
         return self.service

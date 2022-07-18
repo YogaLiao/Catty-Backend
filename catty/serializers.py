@@ -16,9 +16,10 @@ class ServiceSerializer(serializers.ModelSerializer):
     cell = serializers.ReadOnlyField(source='user.cell')
     url = serializers.ReadOnlyField(source='user.url')
     username = serializers.ReadOnlyField(source = 'user.username')
+    about = serializers.ReadOnlyField(source = 'user.about')
     class Meta:
         model = Service
-        fields = ('id','user','displayName', 'headline', 'service', 'rate', 'note', 'disable','zipcode','first_name','last_name','address','city','state','cell', 'url', 'username')
+        fields = ('id','user','displayName', 'headline', 'service', 'rate', 'note', 'disable','zipcode','first_name','last_name','address','city','state','cell', 'url', 'username', 'about')
 
 class UserInfoSerializer(serializers.ModelSerializer):
     services = ServiceSerializer (read_only = True, many=True)
