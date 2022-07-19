@@ -3,8 +3,8 @@ from django.http import JsonResponse, HttpResponse
 from rest_framework import generics, permissions
 from rest_framework.generics import CreateAPIView
 from django.contrib.auth import get_user_model
-from .serializers import UserInfoSerializer, ServiceSerializer
-from .models import UserInfo, Service
+from .serializers import ReviewSerializer, UserInfoSerializer, ServiceSerializer
+from .models import Review, UserInfo, Service
 from django_filters.rest_framework import DjangoFilterBackend
 
 
@@ -54,6 +54,17 @@ class ServiceSearchList(generics.ListAPIView):
     filter_backends = [DjangoFilterBackend]
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     filterset_fields = ['service','zipcode','rate','username']
+
+class ReviewList(generics.ListCreateAPIView):
+    serializer_class = ReviewSerializer
+    queryset = Review.objects.all()
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+    def post(self, request, *args, **kwargs):
+        print(request.data)
+        print(request.user.username)
+        request.user.id = request.data['written_to']
+        return super().post(request, *args, **kwargs)
 
 
 

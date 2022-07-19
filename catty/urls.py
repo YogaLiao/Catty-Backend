@@ -8,6 +8,7 @@ urlpatterns = [
     path('users/<int:pk>', views.UserDetail.as_view(), name='user_detail'),
     path('services/', views.ServiceList.as_view(), name = 'service_list'),
     path('services/<int:pk>', views.ServiceDetail.as_view(), name = 'service_detail'),
+    path('reviews/', views.ReviewList.as_view(), name = 'review_list'),
     path('search/services/', views.ServiceSearchList.as_view(), name = 'service_search')
 ]
 

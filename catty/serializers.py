@@ -1,8 +1,13 @@
 from rest_framework import serializers
-from .models import UserInfo, Service
+from .models import Review, UserInfo, Service
+class ReviewSerializer(serializers.ModelSerializer):
 
+    class Meta:
+        model = Review
+        fields = ('id','written_by','written_to','date','content','rating')
 
 class ServiceSerializer(serializers.ModelSerializer):
+    reviews = ReviewSerializer(read_only = True, many=True)
     # username = serializers.HyperlinkedRelatedField(
     #     view_name='user_detail',
     #     read_only = True
@@ -17,9 +22,10 @@ class ServiceSerializer(serializers.ModelSerializer):
     url = serializers.ReadOnlyField(source='user.url')
     username = serializers.ReadOnlyField(source = 'user.username')
     about = serializers.ReadOnlyField(source = 'user.about')
+
     class Meta:
         model = Service
-        fields = ('id','user','displayName', 'headline', 'service', 'rate', 'note', 'disable','zipcode','first_name','last_name','address','city','state','cell', 'url', 'username', 'about')
+        fields = ('id','user','displayName', 'headline', 'service', 'rate', 'note', 'disable','zipcode','first_name','last_name','address','city','state','cell', 'url', 'username', 'about', 'reviews')
 
 class UserInfoSerializer(serializers.ModelSerializer):
     services = ServiceSerializer (read_only = True, many=True)

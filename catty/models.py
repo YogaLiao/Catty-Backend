@@ -1,6 +1,5 @@
 from django.contrib.postgres.fields import ArrayField
 from django.db import models
-import uuid
 
 
 # Create your models here.
@@ -44,3 +43,13 @@ class Service(models.Model):
 
     def __str__(self):
         return self.service
+
+class Review(models.Model):
+    written_by = models.CharField(max_length=100, default="")
+    written_to = models.ForeignKey(Service, on_delete=models.CASCADE, related_name= 'reviews')
+    date = models.CharField(max_length=500,default='')
+    content = models.CharField(max_length=500,default='')
+    rating = models.IntegerField()
+
+    def __str__(self):
+        return self.rating
