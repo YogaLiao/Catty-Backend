@@ -37,10 +37,10 @@ class ServiceList(generics.ListCreateAPIView):
 
     def post(self, request, *args, **kwargs):
         print("request.user.username")
-        print(request.user.id)
+        print(request.data)
         print(request.user.pk)
         # request.data['username'] = request.user.id
-        request.data['user'] = request.user.id - 1
+        request.user.username = request.data['user']
         return super().post(request, *args, **kwargs)
 
 class ServiceDetail(generics.RetrieveUpdateDestroyAPIView):
