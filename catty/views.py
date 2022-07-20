@@ -40,7 +40,7 @@ class ServiceList(generics.ListCreateAPIView):
         print(request.data)
         print(request.user.pk)
         # request.data['username'] = request.user.id
-        request.user.username = request.data['user']
+        request.user.id = request.data['user']
         return super().post(request, *args, **kwargs)
 
 class ServiceDetail(generics.RetrieveUpdateDestroyAPIView):
