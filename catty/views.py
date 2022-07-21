@@ -67,20 +67,3 @@ class ReviewList(generics.ListCreateAPIView):
         return super().post(request, *args, **kwargs)
 
 
-
-
-
-
-# class TweetListProtected(generics.ListCreateAPIView):
-#     serializer_class = TweetSerializer
-#     queryset = Tweet.objects.all()
-
-#     permission_classes = [permissions.IsAuthenticated]
-    # permission_classes = [permissions.IsAuthenticatedOrReadOnly]
-
-
-
-
-
-
-# Create your views here.
